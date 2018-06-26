@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "502185357634",
+    "firebase_url": "https://journals-2450b.firebaseio.com",
+    "project_id": "journals-2450b",
+    "storage_bucket": "journals-2450b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502185357634:android:2a60a15b564e474d",
+        "android_client_info": {
+          "package_name": "com.noel201296gmail.journals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502185357634-uapp5cdtov77pi7h7m1cgpc2r5495vhd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi6l_xITnpt93m-6Q2Sm_inK9GwpaUh_o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
