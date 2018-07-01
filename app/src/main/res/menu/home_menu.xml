@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <menu xmlns:app="http://schemas.android.com/apk/res-auto"
-          xmlns:android="http://schemas.android.com/apk/res/android" >
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:icon="@mipmap/journals_logo" >
 
     <item android:id="@+id/action_sign_out"
               android:title="@string/btn_sign_out"

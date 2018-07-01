@@ -1,10 +1,12 @@
 package com.noel201296gmail.journals.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -40,30 +42,27 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //Get Firebase auth instance
+
+        if(isNetworkStatusAvialable (getApplicationContext())) {
+        } else {
+            Toast.makeText(getApplicationContext(), "No internet connection detected. Please connect to the internet", Toast.LENGTH_LONG).show();
+        }
+
         auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+            finish();
+        }
 
 
+        inputEmail    = (EditText)    findViewById(R.id.email);
+        inputPassword = (EditText)    findViewById(R.id.password);
+        progressBar   = (ProgressBar) findViewById(R.id.progressBar);
+        btnSignup     = (Button)      findViewById(R.id.btn_signup);
+        btnLogin      = (Button)      findViewById(R.id.btn_login);
+        btnReset      = (Button)      findViewById(R.id.btn_reset_password);
 
-        //if (auth.getCurrentUser() != null) {
-          //  startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            //finish();
-        //}
 
-        // set the view now
-
-
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
-
-        //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -78,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent signInIntent = mGoogleSignInClient.getSignInIntent();
                 startActivityForResult(signInIntent, 101);
+                progressBar.setVisibility(View.VISIBLE);
             }
         });
 
@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(LoginActivity.this, resetpassword.class));
+                Toast.makeText(getApplicationContext(),"Reset password functionality is still under construction" ,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -118,9 +119,6 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                // If sign in fails, display a message to the user. If sign in succeeds
-                                // the auth state listener will be notified and logic to handle the
-                                // signed in user can be handled in the listener.
                                 progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
                                     // there was an error
@@ -157,6 +155,19 @@ public class LoginActivity extends AppCompatActivity {
                 // ...
             }
         }
+    }
+
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+            {
+                return netInfos.isConnected();
+            }
+        }
+        return false;
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
