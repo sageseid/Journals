@@ -24,6 +24,7 @@
 
     <!-- activity_new_entry-->
     <dimen name="view_margin_padding">10dp</dimen>
+    <dimen name="view_height">1dp</dimen>
     <dimen name="edit_txt_layout_margin_bottom">20dp</dimen>
     <dimen name="button_text_size">20sp</dimen>
 
@@ -35,6 +36,6 @@
     <!-- list_item_entry-->
     <dimen name="txt_view_layout_margin_top">130dp</dimen>
     <dimen name="card_elevation">3dp</dimen>
-    <dimen name="card_corner_radius">3dp</dimen>
+    <dimen name="card_corner_radius">2dp</dimen>
 
 </resources>
